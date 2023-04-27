@@ -3,8 +3,8 @@ package pro.sky.java.homeworks.course2;
 public class Main {
     public static void main(String[] args) {
         Car[] cars = {
-                new Car("car1", 4),
-                new Car("car2", 4)
+                new Car("car1"),
+                new Car("car2")
         };
 
         Truck[] trucks = {
@@ -13,13 +13,22 @@ public class Main {
         };
 
         Bicycle[] bicycles = {
-                new Bicycle("bicycle1", 2),
-                new Bicycle("bicycle2", 2)
+                new Bicycle("bicycle1"),
+                new Bicycle("bicycle2")
         };
 
-        ServiceStation station = new ServiceStation();
-        station.check(cars);
-        station.check(trucks);
-        station.check(bicycles);
+        Vehicle[] vehicle = new Vehicle[cars.length + trucks.length + bicycles.length];
+        for (int i = 0; i < cars.length; i++) {
+            vehicle[i] = cars[i];
+        }
+        for (int i = 0; i < trucks.length; i++) {
+            vehicle[i + cars.length] = trucks[i];
+        }
+        for (int i = 0; i < bicycles.length; i++) {
+            vehicle[i + cars.length + trucks.length] = bicycles[i];
+        }
+
+        ServiceStationInterface station = new ServiceStation();
+        station.check(vehicle);
     }
 }
